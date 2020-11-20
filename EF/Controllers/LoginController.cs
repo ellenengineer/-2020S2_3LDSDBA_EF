@@ -9,50 +9,50 @@ using EF.Models;
 
 namespace EF.Controllers
 {
-    [Route("fapen/produto")]
+    [Route("fapen/login")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly INFONEWContext _context;
 
-        public ProdutoController(INFONEWContext context)
+        public LoginController(INFONEWContext context)
         {
             _context = context;
         }
 
-        // GET: api/Produto
+        // GET: api/Login
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Produto>>> GetProdutos()
+        public async Task<ActionResult<IEnumerable<Login>>> GetLogins()
         {
-            return await _context.Produtos.ToListAsync();
+            return await _context.Logins.ToListAsync();
         }
 
-        // GET: api/Produto/5
+        // GET: api/Login/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Produto>> GetProduto(int id)
+        public async Task<ActionResult<Login>> GetLogin(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            var login = await _context.Logins.FindAsync(id);
 
-            if (produto == null)
+            if (login == null)
             {
                 return NotFound();
             }
 
-            return produto;
+            return login;
         }
 
-        // PUT: api/Produto/5
+        // PUT: api/Login/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduto(int id, Produto produto)
+        public async Task<IActionResult> PutLogin(int id, Login login)
         {
-            if (id != produto.CodProd)
+            if (id != login.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(produto).State = EntityState.Modified;
+            _context.Entry(login).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace EF.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProdutoExists(id))
+                if (!LoginExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace EF.Controllers
             return NoContent();
         }
 
-        // POST: api/Produto
+        // POST: api/Login
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Produto>> PostProduto(Produto produto)
+        public async Task<ActionResult<Login>> PostLogin(Login login)
         {
-            _context.Produtos.Add(produto);
+            _context.Logins.Add(login);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduto", new { id = produto.CodProd }, produto);
+            return CreatedAtAction("GetLogin", new { id = login.Id }, login);
         }
 
-        // DELETE: api/Produto/5
+        // DELETE: api/Login/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Produto>> DeleteProduto(int id)
+        public async Task<ActionResult<Login>> DeleteLogin(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto == null)
+            var login = await _context.Logins.FindAsync(id);
+            if (login == null)
             {
                 return NotFound();
             }
 
-            _context.Produtos.Remove(produto);
+            _context.Logins.Remove(login);
             await _context.SaveChangesAsync();
 
-            return produto;
+            return login;
         }
 
-        private bool ProdutoExists(int id)
+        private bool LoginExists(int id)
         {
-            return _context.Produtos.Any(e => e.CodProd == id);
+            return _context.Logins.Any(e => e.Id == id);
         }
     }
 }

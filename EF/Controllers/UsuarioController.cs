@@ -10,7 +10,7 @@ using EF.Aplicacao;
 
 namespace EF.Controllers
 {
-    [Route("fapen/login")]
+    [Route("fapen/login1")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
