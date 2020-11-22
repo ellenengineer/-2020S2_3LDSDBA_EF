@@ -103,7 +103,7 @@ namespace EF.Aplicacao
             try
             {
 
-                listaDProdutos = _contexto.Produtos.Select(x => x).ToList();
+                listaDProdutos = _contexto.Produtos.ToList(); //_contexto.Produtos.Select(x => x).ToList();
 
                 if (listaDProdutos != null)
                 {
